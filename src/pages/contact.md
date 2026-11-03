@@ -1,10 +1,10 @@
 ---
 title: "Contact"
-subtitle: "Get in touch with the CHSA board"
+subtitle: "Get in touch with the CHS board"
 layout: page.njk
 permalink: /contact/
-seoTitle: "Contact | Claremont Hindu Students Association"
-seoDescription: "Contact the Claremont Hindu Students Association."
+seoTitle: "Contact | Claremont Hindu Society"
+seoDescription: "Contact the Claremont Hindu Society."
 ---
 
 For questions, collaborations or event ideas, reach us at:

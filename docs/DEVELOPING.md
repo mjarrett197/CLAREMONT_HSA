@@ -1,4 +1,4 @@
-# Developing the CHSA site
+# Developing the CHS site
 
 Only needed if you want to preview changes on your own computer before
 pushing. Requires Node.js 18 or newer.
@@ -6,7 +6,7 @@ pushing. Requires Node.js 18 or newer.
 ## First-time setup
 
 ```bash
-cd chsa-website
+cd CLAREMONT_HSA
 npm install
 ```
 

@@ -1,17 +1,17 @@
 ---
-title: "Claremont Hindu Students Association"
+title: "Claremont Hindu Society"
 subtitle: "A home for Hindu students and friends across the Claremont Colleges"
 layout: base.njk
 permalink: /
-seoTitle: "Claremont Hindu Students Association (CHSA)"
-seoDescription: "The Hindu Students Association of the Claremont Colleges: CGU, CMC, Harvey Mudd, KGI, Pitzer, Pomona and Scripps. Events, membership and the HSCI Student Wellness Center."
+seoTitle: "Claremont Hindu Society (CHS)"
+seoDescription: "The Hindu Society of the Claremont Colleges: CGU, CMC, Harvey Mudd, KGI, Pitzer, Pomona and Scripps. Events, membership and the HSCI Student Wellness Center."
 ---
 <div class="container">
 
 <section class="home-hero">
   <p class="eyebrow">{% for c in colleges %}{{ c.short }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
   <h1>Community, culture and dharma<br>across the Claremont Colleges.</h1>
-  <p class="lead">REPLACE: one or two sentences in your own words about who CHSA is for and what you do together.</p>
+  <p class="lead">REPLACE: one or two sentences in your own words about who CHS is for and what you do together.</p>
   <div class="hero-actions">
     <a href="/join/" class="btn btn-accent">Become a Member</a>
     <a href="/events/" class="btn btn-ghost">Upcoming events</a>
@@ -54,7 +54,7 @@ seoDescription: "The Hindu Students Association of the Claremont Colleges: CGU, 
 
 <section class="home-section">
   <h2>Our members</h2>
-  <p>CHSA brings together students from all seven Claremont Colleges.</p>
+  <p>CHS brings together students from all seven Claremont Colleges.</p>
   <div class="college-chips">
   {% for c in colleges %}
     {% set n = (members | membersOf(c.id)).length %}

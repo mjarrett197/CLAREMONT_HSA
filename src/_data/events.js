@@ -8,7 +8,7 @@
 // The site sorts events, groups them by month, and moves past events to
 // "Past events" by itself each time it is rebuilt.
 //
-// These are EXAMPLES to replace. Nothing here is a real CHSA event yet.
+// These are EXAMPLES to replace. Nothing here is a real CHS event yet.
 
 module.exports = [
   {

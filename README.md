@@ -1,6 +1,6 @@
-# Claremont Hindu Students Association
+# Claremont Hindu Society
 
-Website for the Claremont Hindu Students Association (CHSA) at the Claremont Colleges.
+Website for the Claremont Hindu Society (CHS) at the Claremont Colleges.
 
 - **Domain:** REPLACE-WITH-YOUR-DOMAIN.org
 - **Stack:** Eleventy · Netlify (same as globalspiritualcare-website)

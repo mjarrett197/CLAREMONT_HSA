@@ -1,8 +1,8 @@
 {
-  "name": "chsa-website",
+  "name": "claremont-hindu-society-website",
   "version": "0.1.0",
   "private": true,
-  "description": "Claremont Hindu Students Association website",
+  "description": "Claremont Hindu Society website",
   "scripts": {
     "build": "eleventy",
     "serve": "eleventy --serve",

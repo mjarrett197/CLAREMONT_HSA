@@ -1,5 +1,5 @@
 ---
-title: "Welcome to CHSA!"
+title: "Welcome to CHS!"
 subtitle: "Thanks for signing up. We're glad you're here."
 layout: page.njk
 permalink: /join/thanks/

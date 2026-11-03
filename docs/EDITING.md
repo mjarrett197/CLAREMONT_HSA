@@ -1,4 +1,4 @@
-# Editing the CHSA site
+# Editing the CHS site
 
 You don't need to install anything to make a content change. Edit a file on
 GitHub (or ask Claude to), commit to `main`, and Netlify publishes it in

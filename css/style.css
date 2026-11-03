@@ -1,4 +1,4 @@
-/* Claremont Hindu Students Association — brand stylesheet
+/* Claremont Hindu Society — brand stylesheet
    Same structure and class names as the HSCI / Global Spiritual Care site,
    so either team can find their way around both. Colours are the variables
    below; change them here and the whole site follows. */
@@ -406,6 +406,7 @@ main { min-height: 60vh; padding: 40px 0 80px; }
 @media (max-width: 720px) {
   :root { --gutter: 16px; }
   .site-header .container { flex-direction: column; align-items: flex-start; padding: 14px var(--gutter); gap: 12px; }
+  .wordmark .mark { font-size: 17px; letter-spacing: 1.5px; white-space: nowrap; }
   .site-nav ul { gap: 18px; flex-wrap: wrap; }
   main { padding-top: 24px; }
   .home-hero { padding: 48px 22px; border-radius: 12px; }

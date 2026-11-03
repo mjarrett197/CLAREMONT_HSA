@@ -6,12 +6,12 @@
 // update by themselves on the next build once these are real.
 
 module.exports = {
-  name: "Claremont Hindu Students Association",
-  short: "CHSA",
+  name: "Claremont Hindu Society",
+  short: "CHS",
   tagline: "A home for Hindu students and friends across the Claremont Colleges",
   // Netlify test address for now. Change to the real domain once bought;
   // the Become a Member QR code follows this on the next build.
-  url: "https://claremont-hsa.netlify.app",
+  url: "https://claremont-hindu-society.netlify.app",
 
   // While true: search engines are asked not to list the site, and a thin
   // banner tells visitors it's a preview. Set to false at launch.
@@ -25,7 +25,7 @@ module.exports = {
     linktree: ""
   },
 
-  // HSCI Student Wellness Center. CHSA links to it; HSCI runs it.
+  // HSCI Student Wellness Center. CHS links to it; HSCI runs it.
   wellness: {
     name: "HSCI Student Wellness Center",
     url: "https://REPLACE-WITH-HSCI-WELLNESS-CENTER-LINK",
