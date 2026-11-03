@@ -1,0 +1,53 @@
+---
+title: "HSCI Student Wellness Center"
+subtitle: "Support for body, mind and spirit, offered by the Hindu Spiritual Care Institute"
+layout: base.njk
+permalink: /wellness/
+seoTitle: "HSCI Student Wellness Center | CHSA"
+seoDescription: "Yoga and meditation, expert videos on the Bhagavad Gita, exam anxiety, stress and relationships, and private conversations with HSCI chaplains and counselors."
+---
+{# Links and topics come from site.wellness in src/_data/site.js. #}
+{% set w = site.wellness %}
+<div class="container">
+
+  <section class="page-hero">
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+  </section>
+
+  <div class="wellness-intro">
+    <div class="wellness-qr">
+      {% qr w.url, w.name %}
+      <p>Scan to open the Wellness Center</p>
+    </div>
+    <div>
+      <p>REPLACE (optional): a sentence on the relationship between CHSA and HSCI, and who the Wellness Center is for.</p>
+      <a href="{{ w.url }}" class="btn btn-primary" target="_blank" rel="noopener">Visit the Wellness Center →</a>
+    </div>
+  </div>
+
+  <div class="card-grid wellness-grid">
+    <a class="card card-link" href="{{ w.yogaUrl or w.url }}" target="_blank" rel="noopener">
+      <h3>Yoga &amp; Meditation Center</h3>
+      <p>Guided yoga and meditation practice for calm and focus.</p>
+      <span class="card-go">Open →</span>
+    </a>
+    <a class="card card-link" href="{{ w.videosUrl or w.url }}" target="_blank" rel="noopener">
+      <h3>Expert videos</h3>
+      <p>Short talks from experts on topics students ask about:</p>
+      <ul class="topic-list">
+        {% for t in w.videoTopics %}<li>{{ t }}</li>{% endfor %}
+        <li>…and more</li>
+      </ul>
+      <span class="card-go">Watch →</span>
+    </a>
+    <a class="card card-link" href="{{ w.conversationUrl or w.url }}" target="_blank" rel="noopener">
+      <h3>Private conversation</h3>
+      <p>Talk one-to-one, in confidence, with an HSCI chaplain or counselor.</p>
+      <span class="card-go">Reach out →</span>
+    </a>
+  </div>
+
+  <p class="safety-note">If you are in crisis, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline), or call 911 in an emergency.</p>
+
+</div>

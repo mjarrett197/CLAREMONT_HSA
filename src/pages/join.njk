@@ -1,0 +1,70 @@
+---
+title: "Become a Member"
+subtitle: "Join the Claremont Hindu Students Association"
+layout: base.njk
+permalink: /join/
+seoTitle: "Become a Member | Claremont Hindu Students Association"
+seoDescription: "Sign up to become a member of the Claremont Hindu Students Association."
+---
+{#
+  Netlify Forms. Netlify finds this form when the site is deployed (the
+  data-netlify attribute) and stores every submission in the Netlify
+  dashboard under Forms → "membership". No server code needed.
+  The hidden "bot-field" is a honeypot that catches spam bots.
+#}
+<div class="container">
+
+  <section class="page-hero">
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+  </section>
+
+  <form class="join-form" name="membership" method="POST" action="/join/thanks/"
+        data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="membership">
+    <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+
+    <div class="field">
+      <label for="name">Full name</label>
+      <input id="name" name="name" type="text" autocomplete="name" required>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="phone">Phone <span class="optional">(optional)</span></label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="college">College</label>
+        <select id="college" name="college" required>
+          <option value="" disabled selected>Choose your college</option>
+          {% for c in colleges %}<option value="{{ c.name }}">{{ c.name }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="grad-year">Expected graduation year</label>
+        <select id="grad-year" name="graduation-year" required>
+          <option value="" disabled selected>Choose a year</option>
+          {% for y in null | gradYears %}<option>{{ y }}</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <label class="check">
+      <input type="checkbox" name="list-on-roster" value="yes" checked>
+      <span>List my name, college and graduation year on the public <a href="/members/">Members</a> page. Your contact details are never published.</span>
+    </label>
+
+    <button type="submit" class="btn btn-primary">Become a Member</button>
+  </form>
+
+  <p class="form-note">Questions? Email <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>.</p>
+
+</div>

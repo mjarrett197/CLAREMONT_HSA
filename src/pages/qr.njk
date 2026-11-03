@@ -1,0 +1,35 @@
+---
+title: "QR Codes"
+subtitle: "For flyers, posters and slides"
+layout: base.njk
+permalink: /qr/
+noindex: true
+eleventyExcludeFromCollections: true
+---
+{# Not in the menu. Visit /qr/ to print or download the codes. They are
+   generated from the links in src/_data/site.js on every build. #}
+<div class="container">
+
+  <section class="page-hero no-print">
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+  </section>
+
+  {% if "REPLACE" in site.url or "REPLACE" in site.wellness.url %}
+  <p class="warn no-print"><strong>Not ready to print yet.</strong> One or both links in <code>src/_data/site.js</code> are still placeholders, so these codes point nowhere. Fill in the real links and the codes update on the next build.</p>
+  {% endif %}
+
+  <div class="qr-print">
+    <figure>
+      {% qr site.url + "/join/", "Become a Member" %}
+      <figcaption><strong>Become a Member</strong><span>{{ site.url | replace("https://", "") }}/join</span></figcaption>
+      <a class="no-print" href="/qr/become-a-member.png" download>Download PNG</a>
+    </figure>
+    <figure>
+      {% qr site.wellness.url, site.wellness.name %}
+      <figcaption><strong>{{ site.wellness.name }}</strong><span>{{ site.wellness.url | replace("https://", "") }}</span></figcaption>
+      <a class="no-print" href="/qr/wellness-center.png" download>Download PNG</a>
+    </figure>
+  </div>
+
+</div>

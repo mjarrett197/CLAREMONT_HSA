@@ -1,0 +1,40 @@
+---
+title: "Members"
+subtitle: "CHSA members across the seven Claremont Colleges"
+layout: base.njk
+permalink: /members/
+seoTitle: "Members | Claremont Hindu Students Association"
+seoDescription: "The Claremont Hindu Students Association membership roster by college."
+---
+{# Rendered from src/_data/members.js and colleges.js. Only names, college
+   and graduation year are ever published here. #}
+<div class="container">
+
+  <section class="page-hero">
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+    <p class="roster-total">{{ members.length }} member{% if members.length != 1 %}s{% endif %} · <a href="/join/">Become a member →</a></p>
+  </section>
+
+  <div class="roster">
+  {% for c in colleges %}
+    {% set people = members | membersOf(c.id) %}
+    <section class="roster-college" id="{{ c.id }}">
+      <header>
+        <h2>{{ c.name }}</h2>
+        <span class="roster-count">{{ people.length }}</span>
+      </header>
+      {% if people.length %}
+        <ul>
+        {% for m in people %}<li>{{ m.name }}{% if m.gradYear %} <span>’{{ m.gradYear % 100 }}</span>{% endif %}</li>{% endfor %}
+        </ul>
+      {% else %}
+        <p class="roster-empty">No members listed yet. <a href="/join/">Be the first →</a></p>
+      {% endif %}
+    </section>
+  {% endfor %}
+  </div>
+
+  <p class="roster-note">Members choose whether their name appears here. Contact details are never published.</p>
+
+</div>

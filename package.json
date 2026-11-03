@@ -1,0 +1,15 @@
+{
+  "name": "chsa-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claremont Hindu Students Association website",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.5",
+    "qrcode": "^1.5.4"
+  }
+}

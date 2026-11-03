@@ -1,0 +1,66 @@
+---
+title: "Claremont Hindu Students Association"
+subtitle: "A home for Hindu students and friends across the Claremont Colleges"
+layout: base.njk
+permalink: /
+seoTitle: "Claremont Hindu Students Association (CHSA)"
+seoDescription: "The Hindu Students Association of the Claremont Colleges: CGU, CMC, Harvey Mudd, KGI, Pitzer, Pomona and Scripps. Events, membership and the HSCI Student Wellness Center."
+---
+<div class="container">
+
+<section class="home-hero">
+  <p class="eyebrow">{% for c in colleges %}{{ c.short }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
+  <h1>Community, culture and dharma<br>across the Claremont Colleges.</h1>
+  <p class="lead">REPLACE: one or two sentences in your own words about who CHSA is for and what you do together.</p>
+  <div class="hero-actions">
+    <a href="/join/" class="btn btn-accent">Become a Member</a>
+    <a href="/events/" class="btn btn-ghost">Upcoming events</a>
+  </div>
+</section>
+
+<section class="home-section">
+  <div class="qr-pair">
+    <a class="qr-card" href="/join/">
+      {% qr site.url + "/join/", "Become a Member" %}
+      <div>
+        <p class="qr-kicker">Scan to join</p>
+        <h3>Become a Member</h3>
+        <p>Name, contact, college and graduation year. Takes a minute.</p>
+      </div>
+    </a>
+    <a class="qr-card" href="/wellness/">
+      {% qr site.wellness.url, site.wellness.name %}
+      <div>
+        <p class="qr-kicker">Scan for support</p>
+        <h3>{{ site.wellness.name }}</h3>
+        <p>Yoga and meditation, expert videos, and private conversations with chaplains and counselors.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>Coming up</h2>
+  {% set next = events | upcoming %}
+  {% if next.length %}
+  <div class="event-list">
+  {% for e in next.slice(0, 3) %}{% set isPast = false %}{% include "event-card.njk" %}{% endfor %}
+  </div>
+  <p class="more-link"><a href="/events/">Full calendar →</a></p>
+  {% else %}
+  <p>Nothing scheduled right now. Check back soon.</p>
+  {% endif %}
+</section>
+
+<section class="home-section">
+  <h2>Our members</h2>
+  <p>CHSA brings together students from all seven Claremont Colleges.</p>
+  <div class="college-chips">
+  {% for c in colleges %}
+    {% set n = (members | membersOf(c.id)).length %}
+    <a class="college-chip" href="/members/#{{ c.id }}"><strong>{{ c.short }}</strong><span>{{ n }} member{% if n != 1 %}s{% endif %}</span></a>
+  {% endfor %}
+  </div>
+</section>
+
+</div>

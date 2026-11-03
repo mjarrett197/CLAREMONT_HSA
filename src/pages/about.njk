@@ -1,0 +1,64 @@
+---
+title: "About CHSA"
+subtitle: "Our objective, our leadership, and how to become a member"
+layout: base.njk
+permalink: /about/
+seoTitle: "About | Claremont Hindu Students Association"
+seoDescription: "The objective, student leadership and membership requirements of the Claremont Hindu Students Association."
+---
+{# Leadership is rendered from src/_data/board.js. The text sections are
+   written here. #}
+<div class="container">
+
+  <section class="page-hero">
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+    <nav class="jump-links" aria-label="On this page">
+      <a href="#objective">Objective</a>
+      <a href="#leadership">Student leadership</a>
+      <a href="#membership">Membership requirements</a>
+    </nav>
+  </section>
+
+  <div class="page-content">
+
+    <section id="objective" class="about-section">
+      <h2>Our objective</h2>
+      <p>REPLACE: CHSA's objective in a few sentences: why it exists, who it serves, and what it hopes members take away.</p>
+    </section>
+
+    <section id="leadership" class="about-section">
+      <h2>Student body leadership</h2>
+      <p>REPLACE (optional): a sentence on how the board is chosen and when elections happen.</p>
+    </section>
+  </div>
+
+  <div class="board-grid">
+  {% for m in board %}
+    <section class="board-card" id="{{ m.id }}">
+      {% if m.photo %}
+        <img class="board-photo" src="{{ m.photo }}" alt="{{ m.name }}" width="112" height="112" loading="lazy">
+      {% else %}
+        <div class="board-photo board-initials" aria-hidden="true">{{ m.role | first }}</div>
+      {% endif %}
+      <h3>{{ m.name }}</h3>
+      <p class="board-role">{{ m.role }}</p>
+      {% set cn = m.college | collegeName(colleges) %}
+      {% if cn or m.gradYear %}<p class="board-college">{{ cn }}{% if cn and m.gradYear %} · {% endif %}{% if m.gradYear %}Class of {{ m.gradYear }}{% endif %}</p>{% endif %}
+    </section>
+  {% endfor %}
+  </div>
+
+  <div class="page-content">
+    <section id="membership" class="about-section">
+      <h2>Membership requirements</h2>
+      <ul>
+        <li>REPLACE: e.g. a current student at one of the seven Claremont Colleges.</li>
+        <li>REPLACE: e.g. any dues, or "membership is free".</li>
+        <li>REPLACE: e.g. attending a set number of events per semester to vote in elections.</li>
+      </ul>
+      <p><a href="/join/" class="btn btn-primary">Become a Member</a></p>
+    </section>
+  </div>
+
+</div>

@@ -1,0 +1,42 @@
+---
+title: "Events Calendar"
+subtitle: "Festivals, gatherings and everything else coming up at CHSA."
+layout: base.njk
+permalink: /events/
+seoTitle: "Events | Claremont Hindu Students Association"
+seoDescription: "Upcoming events from the Claremont Hindu Students Association."
+---
+{# Rendered from src/_data/events.js. Add or change events there, not here. #}
+<div class="container">
+
+  <section class="page-hero">
+    <h1>{{ title }}</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+  </section>
+
+  {% set next = events | upcoming %}
+  {% set done = events | past %}
+
+  {% if next.length %}
+    {% for month in next | byMonth %}
+    <section class="event-section">
+      <h2 class="month-heading">{{ month.label }}</h2>
+      <div class="event-list">
+      {% for e in month.events %}{% set isPast = false %}{% include "event-card.njk" %}{% endfor %}
+      </div>
+    </section>
+    {% endfor %}
+  {% else %}
+    <section class="event-section"><p>Nothing scheduled right now. Check back soon.</p></section>
+  {% endif %}
+
+  {% if done.length %}
+  <section class="event-section">
+    <h2 class="month-heading">Past events</h2>
+    <div class="event-list">
+    {% for e in done %}{% set isPast = true %}{% include "event-card.njk" %}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+</div>

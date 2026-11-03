@@ -1,0 +1,14 @@
+---
+layout: base.njk
+---
+
+<div class="container">
+  <section class="page-hero">
+    <h1>{{ title }}</h1>
+    {% if subtitle %}<p class="subtitle">{{ subtitle }}</p>{% endif %}
+  </section>
+
+  <div class="page-content">
+    {{ content | safe }}
+  </div>
+</div>

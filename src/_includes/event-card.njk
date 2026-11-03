@@ -1,0 +1,19 @@
+{# One event. Used by the Events calendar and the home page so they always match. #}
+<article class="event-card{% if isPast %} is-past{% endif %}" id="{{ e.id }}">
+  <div class="event-date">
+    <span class="event-month">{{ e.date | eventMonth }}</span>
+    <span class="event-day">{{ e.date | eventDay }}</span>
+    <span class="event-weekday">{{ e.date | eventWeekday }}</span>
+  </div>
+  <div class="event-body">
+    <h3>{{ e.title }}</h3>
+    <p class="event-meta">{{ e | eventTime }}{% if e.location %} · {{ e.location }}{% endif %}</p>
+    {% if e.description %}<p>{{ e.description }}</p>{% endif %}
+    {% if not isPast %}
+    <p class="event-actions">
+      <a href="{{ e | gcalLink }}" target="_blank" rel="noopener">+ Add to Google Calendar</a>
+      {% if e.link %}<a href="{{ e.link }}" target="_blank" rel="noopener">RSVP / details →</a>{% endif %}
+    </p>
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,3 @@
+# Old URL → new URL, one per line.
+/board/          /about/#leadership   301
+/get-involved/   /join/               301
