@@ -34,6 +34,15 @@ It appears on the Events calendar under its month, with an "Add to Google
 Calendar" link, and on the home page if it's one of the next three. When the
 date passes it moves to "Past events" on the next rebuild.
 
+## Sign-ups in Google Sheets
+
+Every verified sign-up is also copied to a board-only Google Sheet by
+`netlify/functions/submission-created.js`. The sheet's Apps Script link
+(ending in `?token=...`) is stored in Netlify under Project configuration →
+Environment variables → `SHEETS_WEBHOOK_URL`, never in the code. If the sheet
+ever stops updating, sign-ups are still safe in Netlify; check the function's
+log under Logs → Functions, and the sheet's "Webhook log" tab.
+
 ## New member sign-ups → the roster
 
 Sign-ups from the Become a Member form (and its QR code) appear in Netlify

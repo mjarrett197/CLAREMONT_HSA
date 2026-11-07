@@ -2,6 +2,10 @@
   publish = "_site"
   command = "npx @11ty/eleventy"
 
+[functions]
+  # submission-created.js copies each membership sign-up to the Google Sheet.
+  directory = "netlify/functions"
+
 [[headers]]
   for = "/*"
   [headers.values]
