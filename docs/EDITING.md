@@ -4,22 +4,20 @@ You don't need to install anything to make a content change. Edit a file on
 GitHub (or ask Claude to), commit to `main`, and Netlify publishes it in
 about a minute.
 
-## First-time setup checklist
+## What still needs filling in
 
-1. `src/_data/site.js`: set `url` (your domain), `contact.email`, and
-   `wellness.url` (the HSCI Student Wellness Center link). Add the
-   separate yoga / videos / private-conversation links if HSCI has them.
-2. `src/pages/about.njk`: write the Objective and Membership requirements.
-3. `src/_data/board.js`: the student leadership.
-4. `src/_data/events.js`: replace the example events.
-5. `src/index.njk` and `src/pages/wellness.njk`: the short intro lines.
-6. In Netlify: **Forms → Enable form detection**, then redeploy once. Under
-   **Forms → membership → Form notifications**, add the board email so each
-   sign-up is emailed to you.
-7. Visit `/qr/` on the live site, check both codes scan, and print or
-   download them. (The page warns you if a link is still a placeholder.)
+Each of these is hidden on the site until it has content, so nothing shows
+half-finished:
 
-Search the repo for `REPLACE` to find anything left.
+- `src/_data/site.js`: `intro` (home page, in the students' own words),
+  `contact.email`, `social` links.
+- `src/_data/about.js`: objective, board note, membership requirements.
+  The About page and its menu link appear once any of these, or a board
+  member, exists.
+- `src/_data/board.js`: student leadership.
+- Wellness Center: switched off with `wellness.enabled: false` in `site.js`
+  until the affiliate agreement is signed. The checklist for switching it
+  back on is in the comment above that setting.
 
 ## Add an event
 
@@ -42,7 +40,8 @@ Sign-ups from the Become a Member form (and its QR code) appear in Netlify
 under **Forms → membership**, with name, email, phone, college and
 graduation year.
 
-If the person ticked "List my name on the public roster", add a line to
+If the person ticked "Also list my name ... on the public Members page" (it
+starts unticked), add a line to
 `src/_data/members.js`:
 
 ```js
@@ -61,8 +60,9 @@ Edit `src/_data/board.js`. For a photo, upload a square image to
 
 ## QR codes
 
-The two codes are made from the links in `src/_data/site.js` on every
-build: one to `<your domain>/join/`, one to the Wellness Center link. If a
+The codes are made from the links in `src/_data/site.js` on every build:
+one to `<url>/join/`, and one to the Wellness Center link while that page
+is switched on. If a
 link changes, the code changes too, so reprint any flyers after changing
 one. Printable versions and PNG downloads are at `/qr/`.
 

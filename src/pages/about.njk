@@ -1,38 +1,40 @@
+---js
+{
+  title: "About CHS",
+  subtitle: "Who we are and how to become a member",
+  layout: "base.njk",
+  // Hidden until there is something to say (src/_data/about.js, board.js).
+  permalink: (data) => (data.about.objective || data.about.boardNote || data.about.requirements.length || data.board.length) ? "/about/" : false,
+  seoTitle: "About | Claremont Hindu Society",
+  seoDescription: "Who the Claremont Hindu Society is, its student leadership, and how to become a member."
+}
 ---
-title: "About CHS"
-subtitle: "Our objective, our leadership, and how to become a member"
-layout: base.njk
-permalink: /about/
-seoTitle: "About | Claremont Hindu Society"
-seoDescription: "The objective, student leadership and membership requirements of the Claremont Hindu Society."
----
-{# Leadership is rendered from src/_data/board.js. The text sections are
-   written here. #}
+{# Text comes from src/_data/about.js, leadership from board.js. Each
+   section only appears once it has content. #}
 <div class="container">
 
   <section class="page-hero">
     <h1>{{ title }}</h1>
     <p class="subtitle">{{ subtitle }}</p>
-    <nav class="jump-links" aria-label="On this page">
-      <a href="#objective">Objective</a>
-      <a href="#leadership">Student leadership</a>
-      <a href="#membership">Membership requirements</a>
-    </nav>
   </section>
 
   <div class="page-content">
-
+    {% if about.objective %}
     <section id="objective" class="about-section">
       <h2>Our objective</h2>
-      <p>REPLACE: CHS's objective in a few sentences: why it exists, who it serves, and what it hopes members take away.</p>
+      <p>{{ about.objective }}</p>
     </section>
+    {% endif %}
 
+    {% if board.length or about.boardNote %}
     <section id="leadership" class="about-section">
-      <h2>Student body leadership</h2>
-      <p>REPLACE (optional): a sentence on how the board is chosen and when elections happen.</p>
+      <h2>Student leadership</h2>
+      {% if about.boardNote %}<p>{{ about.boardNote }}</p>{% endif %}
     </section>
+    {% endif %}
   </div>
 
+  {% if board.length %}
   <div class="board-grid">
   {% for m in board %}
     <section class="board-card" id="{{ m.id }}">
@@ -48,15 +50,16 @@ seoDescription: "The objective, student leadership and membership requirements o
     </section>
   {% endfor %}
   </div>
+  {% endif %}
 
   <div class="page-content">
     <section id="membership" class="about-section">
+      {% if about.requirements.length %}
       <h2>Membership requirements</h2>
       <ul>
-        <li>REPLACE: e.g. a current student at one of the seven Claremont Colleges.</li>
-        <li>REPLACE: e.g. any dues, or "membership is free".</li>
-        <li>REPLACE: e.g. attending a set number of events per semester to vote in elections.</li>
+        {% for r in about.requirements %}<li>{{ r }}</li>{% endfor %}
       </ul>
+      {% endif %}
       <p><a href="/join/" class="btn btn-primary">Become a Member</a></p>
     </section>
   </div>

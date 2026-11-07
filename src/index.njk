@@ -4,14 +4,14 @@ subtitle: "A home for Hindu students and friends across the Claremont Colleges"
 layout: base.njk
 permalink: /
 seoTitle: "Claremont Hindu Society (CHS)"
-seoDescription: "The Hindu Society of the Claremont Colleges: CGU, CMC, Harvey Mudd, KGI, Pitzer, Pomona and Scripps. Events, membership and the HSCI Student Wellness Center."
+seoDescription: "The Hindu Society of the Claremont Colleges: CGU, CMC, Harvey Mudd, KGI, Pitzer, Pomona and Scripps. Festivals, events and membership."
 ---
 <div class="container">
 
 <section class="home-hero">
   <p class="eyebrow">{% for c in colleges %}{{ c.short }}{% if not loop.last %} · {% endif %}{% endfor %}</p>
   <h1>Community, culture and dharma<br>across the Claremont Colleges.</h1>
-  <p class="lead">REPLACE: one or two sentences in your own words about who CHS is for and what you do together.</p>
+  {% if site.intro %}<p class="lead">{{ site.intro }}</p>{% endif %}
   <div class="hero-actions">
     <a href="/join/" class="btn btn-accent">Become a Member</a>
     <a href="/events/" class="btn btn-ghost">Upcoming events</a>
@@ -19,7 +19,7 @@ seoDescription: "The Hindu Society of the Claremont Colleges: CGU, CMC, Harvey M
 </section>
 
 <section class="home-section">
-  <div class="qr-pair">
+  <div class="qr-pair{% if not site.wellness.enabled %} qr-pair--single{% endif %}">
     <a class="qr-card" href="/join/">
       {% qr site.url + "/join/", "Become a Member" %}
       <div>
@@ -28,6 +28,7 @@ seoDescription: "The Hindu Society of the Claremont Colleges: CGU, CMC, Harvey M
         <p>Name, contact, college and graduation year. Takes a minute.</p>
       </div>
     </a>
+    {% if site.wellness.enabled %}
     <a class="qr-card" href="/wellness/">
       {% qr site.wellness.url, site.wellness.name %}
       <div>
@@ -36,6 +37,7 @@ seoDescription: "The Hindu Society of the Claremont Colleges: CGU, CMC, Harvey M
         <p>Yoga and meditation, expert videos, and private conversations with chaplains and counselors.</p>
       </div>
     </a>
+    {% endif %}
   </div>
 </section>
 
@@ -52,6 +54,7 @@ seoDescription: "The Hindu Society of the Claremont Colleges: CGU, CMC, Harvey M
   {% endif %}
 </section>
 
+{% if members.length %}
 <section class="home-section">
   <h2>Our members</h2>
   <p>CHS brings together students from all seven Claremont Colleges.</p>
@@ -62,5 +65,6 @@ seoDescription: "The Hindu Society of the Claremont Colleges: CGU, CMC, Harvey M
   {% endfor %}
   </div>
 </section>
+{% endif %}
 
 </div>

@@ -2,7 +2,7 @@
 
 Website for the Claremont Hindu Society (CHS) at the Claremont Colleges.
 
-- **Domain:** REPLACE-WITH-YOUR-DOMAIN.org
+- **Live at:** https://claremonthsa.netlify.app
 - **Stack:** Eleventy · Netlify (same as globalspiritualcare-website)
 - **Membership form:** Netlify Forms (submissions in the Netlify dashboard)
 - **QR codes:** generated on every build from the links in `site.js`; print them from `/qr/`
@@ -15,6 +15,7 @@ src/              Eleventy source
   _data/          Content as data  ← most edits happen here
     site.js         name, domain, email, Wellness Center links (QR codes come from these)
     events.js       events calendar
+    about.js        About page text (objective, requirements)
     board.js        student leadership (shown on About)
     members.js      membership roster (shown on Members, by college)
     colleges.js     the seven Claremont Colleges
@@ -37,7 +38,8 @@ _redirects        Old URL → new URL redirects
 | Student leadership            | `src/_data/board.js`        |
 | Membership roster             | `src/_data/members.js`      |
 | Email, domain, Wellness links | `src/_data/site.js`         |
-| About text / requirements     | `src/pages/about.njk`       |
+| About text / requirements     | `src/_data/about.js`        |
+| Share image (link previews)   | `images/og/share.jpg`       |
 | Home page text                | `src/index.njk`             |
 | Colours / fonts               | `css/style.css` (top)       |
 | Header / footer links         | `src/_includes/base.njk`    |

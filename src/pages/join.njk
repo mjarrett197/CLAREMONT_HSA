@@ -4,7 +4,7 @@ subtitle: "Join the Claremont Hindu Society"
 layout: base.njk
 permalink: /join/
 seoTitle: "Become a Member | Claremont Hindu Society"
-seoDescription: "Sign up to become a member of the Claremont Hindu Society."
+seoDescription: "Sign up for the Claremont Hindu Society at the Claremont Colleges. It takes about a minute."
 ---
 {#
   Netlify Forms. Netlify finds this form when the site is deployed (the
@@ -58,13 +58,20 @@ seoDescription: "Sign up to become a member of the Claremont Hindu Society."
     </div>
 
     <label class="check">
-      <input type="checkbox" name="list-on-roster" value="yes" checked>
-      <span>List my name, college and graduation year on the public <a href="/members/">Members</a> page. Your contact details are never published.</span>
+      <input type="checkbox" name="list-on-roster" value="yes">
+      <span>Also list my name, college and graduation year on the public <a href="/members/">Members</a> page. Leave this unticked to stay off it.</span>
     </label>
+
+    <div class="privacy-note">
+      <p><strong>Who sees your details</strong></p>
+      <p>Your name, email, phone, college and graduation year go to the CHS student board. They are held in the CHS account on Netlify, the service that hosts this website, and only the board's website administrators can sign in to see them.</p>
+      <p>Your email and phone number are never published. Your name, college and graduation year appear on the public Members page only if you tick the box above.</p>
+      <p>To change or remove your details, or to come off the Members page, {% if site.contact.email %}email <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>{% else %}ask any CHS board member{% endif %}.</p>
+    </div>
 
     <button type="submit" class="btn btn-primary">Become a Member</button>
   </form>
 
-  <p class="form-note">Questions? Email <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>.</p>
+  {% if site.contact.email %}<p class="form-note">Questions? Email <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>.</p>{% endif %}
 
 </div>

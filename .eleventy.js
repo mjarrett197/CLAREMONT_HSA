@@ -96,6 +96,7 @@ module.exports = function(eleventyConfig) {
   // a link there changes the code. Never edit a QR image by hand.
   const qrColors = { dark: "#4E1119", light: "#FFFFFF" };
   eleventyConfig.addNunjucksAsyncShortcode("qr", async (url, label) => {
+    if (!url) return "";
     const svg = await QRCode.toString(url, { type: "svg", margin: 2, errorCorrectionLevel: "M", color: qrColors });
     return svg.replace("<svg ", `<svg role="img" aria-label="QR code: ${label}" class="qr-svg" `);
   });
@@ -109,7 +110,9 @@ module.exports = function(eleventyConfig) {
     fs.mkdirSync(out, { recursive: true });
     const opts = { width: 1200, margin: 2, errorCorrectionLevel: "M", color: qrColors };
     await QRCode.toFile(path.join(out, "become-a-member.png"), `${site.url}/join/`, opts);
-    await QRCode.toFile(path.join(out, "wellness-center.png"), site.wellness.url, opts);
+    if (site.wellness.enabled) {
+      await QRCode.toFile(path.join(out, "wellness-center.png"), site.wellness.url, opts);
+    }
   });
 
   return {

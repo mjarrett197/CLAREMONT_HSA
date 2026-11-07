@@ -4,14 +4,36 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% if seoTitle %}{{ seoTitle }}{% elif title and page.url != "/" %}{{ title }} · {{ site.short }}{% else %}{{ site.name }}{% endif %}</title>
-<meta name="description" content="{{ seoDescription or subtitle or site.tagline }}">
+{#- Text used by search results and link previews (WhatsApp, iMessage,
+    Instagram, Facebook, LinkedIn, X). A page can set its own with
+    seoTitle / seoDescription / ogImage in its front matter. -#}
+{%- set metaTitle = (title + " · " + site.name) if (title and page.url != "/") else site.name -%}
+{%- set metaDesc = seoDescription or subtitle or site.tagline -%}
+{%- set metaImage = site.url + (ogImage or site.shareImage.path) -%}
+<meta name="description" content="{{ metaDesc }}">
 {% if noindex or site.testMode %}<meta name="robots" content="noindex, nofollow">
 {% endif %}<link rel="canonical" href="{{ site.url }}{{ page.url }}">
-<meta property="og:title" content="{% if title %}{{ title }} · {% endif %}{{ site.name }}">
-<meta property="og:description" content="{{ subtitle or site.tagline }}">
-<meta property="og:type" content="website">
-<meta property="og:url" content="{{ site.url }}{{ page.url }}">
 <meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:title" content="{{ metaTitle }}">
+<meta property="og:description" content="{{ metaDesc }}">
+<meta property="og:image" content="{{ metaImage }}">
+<meta property="og:image:secure_url" content="{{ metaImage }}">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ site.shareImage.alt }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ metaTitle }}">
+<meta name="twitter:description" content="{{ metaDesc }}">
+<meta name="twitter:image" content="{{ metaImage }}">
+<meta name="twitter:image:alt" content="{{ site.shareImage.alt }}">
+<meta name="theme-color" content="#7A1F2B">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/images/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
@@ -25,7 +47,9 @@
   "alternateName": "{{ site.short }}",
   "url": "{{ site.url }}",
   "description": "{{ site.tagline }}",
-  "email": "{{ site.contact.email }}"
+  "logo": "{{ site.url }}/images/icons/icon-512.png",
+  "image": "{{ site.url }}{{ site.shareImage.path }}"{% if site.contact.email %},
+  "email": "{{ site.contact.email }}"{% endif %}
 }
 </script>
 </head>
@@ -40,10 +64,10 @@
     </a>
     <nav class="site-nav" aria-label="Primary">
       <ul>
-        <li><a href="/about/">About</a></li>
+        {% if hasAbout %}<li><a href="/about/">About</a></li>{% endif %}
         <li><a href="/members/">Members</a></li>
         <li><a href="/events/">Events</a></li>
-        <li><a href="/wellness/">Wellness Center</a></li>
+        {% if site.wellness.enabled %}<li><a href="/wellness/">Wellness Center</a></li>{% endif %}
         <li><a href="/join/" class="nav-cta">Become a Member</a></li>
       </ul>
     </nav>
@@ -64,22 +88,24 @@
     <div>
       <h4>Explore</h4>
       <ul>
-        <li><a href="/about/">About</a></li>
+        {% if hasAbout %}<li><a href="/about/">About</a></li>{% endif %}
         <li><a href="/members/">Members</a></li>
         <li><a href="/events/">Events</a></li>
-        <li><a href="/wellness/">{{ site.wellness.name }}</a></li>
+        {% if site.wellness.enabled %}<li><a href="/wellness/">{{ site.wellness.name }}</a></li>{% endif %}
         <li><a href="/join/">Become a Member</a></li>
-        <li><a href="/contact/">Contact</a></li>
+        {% if hasContact %}<li><a href="/contact/">Contact</a></li>{% endif %}
       </ul>
     </div>
+    {% if hasContact %}
     <div>
       <h4>Stay in touch</h4>
       <ul>
-        <li><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></li>
+        {% if site.contact.email %}<li><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></li>{% endif %}
         {% if site.social.instagram %}<li><a href="{{ site.social.instagram }}" target="_blank" rel="noopener">Instagram</a></li>{% endif %}
         {% if site.social.linktree %}<li><a href="{{ site.social.linktree }}" target="_blank" rel="noopener">All links</a></li>{% endif %}
       </ul>
     </div>
+    {% endif %}
     <div class="footer-legal">
       <p>© {% year %} {{ site.name }}. A student organization at the Claremont Colleges.</p>
     </div>

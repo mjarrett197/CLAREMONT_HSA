@@ -1,14 +1,12 @@
-// Student body leadership, shown on the About page.
+// Student leadership, shown on the About page. Empty until the board is
+// confirmed; the leadership section stays hidden while this list is empty.
 //
-// photo is optional: put the image in /images/board/ and give its path, or
-// leave it "" for a circle with the role's first letter. Nothing here is
-// invented: replace the placeholders when the board is confirmed.
+// One line per person:
+//   { id: "president", name: "Priya Sharma", role: "President", college: "pomona", gradYear: 2028, photo: "" },
 //
-// college must be one of the ids in colleges.js.
+// college: one of the ids in colleges.js (cgu cmc hmc kgi pitzer pomona scripps)
+// photo: "/images/board/priya.jpg" (square, ~400px, with their OK) or "" for
+// a circle with the role's first letter.
 
 module.exports = [
-  { id: "president",      name: "REPLACE NAME", role: "President",      college: "", gradYear: "", photo: "" },
-  { id: "vice-president", name: "REPLACE NAME", role: "Vice President", college: "", gradYear: "", photo: "" },
-  { id: "treasurer",      name: "REPLACE NAME", role: "Treasurer",      college: "", gradYear: "", photo: "" },
-  { id: "events-chair",   name: "REPLACE NAME", role: "Events Chair",   college: "", gradYear: "", photo: "" }
 ];

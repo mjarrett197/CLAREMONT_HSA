@@ -15,8 +15,8 @@ eleventyExcludeFromCollections: true
     <p class="subtitle">{{ subtitle }}</p>
   </section>
 
-  {% if "REPLACE" in site.url or "REPLACE" in site.wellness.url %}
-  <p class="warn no-print"><strong>Not ready to print yet.</strong> One or both links in <code>src/_data/site.js</code> are still placeholders, so these codes point nowhere. Fill in the real links and the codes update on the next build.</p>
+  {% if site.wellness.enabled and not site.wellness.url %}
+  <p class="warn no-print"><strong>Not ready to print yet.</strong> The Wellness Center is switched on but has no link in <code>src/_data/site.js</code>, so its code points nowhere.</p>
   {% endif %}
 
   <div class="qr-print">
@@ -25,11 +25,13 @@ eleventyExcludeFromCollections: true
       <figcaption><strong>Become a Member</strong><span>{{ site.url | replace("https://", "") }}/join</span></figcaption>
       <a class="no-print" href="/qr/become-a-member.png" download>Download PNG</a>
     </figure>
+    {% if site.wellness.enabled %}
     <figure>
       {% qr site.wellness.url, site.wellness.name %}
       <figcaption><strong>{{ site.wellness.name }}</strong><span>{{ site.wellness.url | replace("https://", "") }}</span></figcaption>
       <a class="no-print" href="/qr/wellness-center.png" download>Download PNG</a>
     </figure>
+    {% endif %}
   </div>
 
 </div>

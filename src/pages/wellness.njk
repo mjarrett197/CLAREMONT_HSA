@@ -1,12 +1,17 @@
----
-title: "HSCI Student Wellness Center"
-subtitle: "Support for body, mind and spirit, offered by the Hindu Spiritual Care Institute"
-layout: base.njk
-permalink: /wellness/
-seoTitle: "HSCI Student Wellness Center | CHS"
-seoDescription: "Yoga and meditation, expert videos on the Bhagavad Gita, exam anxiety, stress and relationships, and private conversations with HSCI chaplains and counselors."
+---js
+{
+  title: "HSCI Student Wellness Center",
+  subtitle: "Support for body, mind and spirit, offered by the Hindu Spiritual Care Institute",
+  layout: "base.njk",
+  // Only built while site.wellness.enabled is true (src/_data/site.js).
+  permalink: (data) => (data.site.wellness.enabled ? "/wellness/" : false),
+  eleventyExcludeFromCollections: true,
+  seoTitle: "HSCI Student Wellness Center | CHS",
+  seoDescription: "Yoga and meditation, expert videos on the Bhagavad Gita, exam anxiety, stress and relationships, and private conversations with HSCI chaplains and counselors."
+}
 ---
 {# Links and topics come from site.wellness in src/_data/site.js. #}
+{% if site.wellness.enabled %}
 {% set w = site.wellness %}
 <div class="container">
 
@@ -21,7 +26,7 @@ seoDescription: "Yoga and meditation, expert videos on the Bhagavad Gita, exam a
       <p>Scan to open the Wellness Center</p>
     </div>
     <div>
-      <p>REPLACE (optional): a sentence on the relationship between CHS and HSCI, and who the Wellness Center is for.</p>
+      {% if w.intro %}<p>{{ w.intro }}</p>{% endif %}
       <a href="{{ w.url }}" class="btn btn-primary" target="_blank" rel="noopener">Visit the Wellness Center →</a>
     </div>
   </div>
@@ -48,6 +53,11 @@ seoDescription: "Yoga and meditation, expert videos on the Bhagavad Gita, exam a
     </a>
   </div>
 
-  <p class="safety-note">If you are in crisis, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline), or call 911 in an emergency.</p>
+  <div class="safety-note">
+    <p><strong>Need to talk to someone now?</strong></p>
+    <p>Students at Pomona, CMC, Harvey Mudd, Scripps and Pitzer can call <a href="https://services.claremont.edu/mcaps">Monsour Counseling and Psychological Services (MCAPS)</a> at <a href="tel:+19096218202">(909) 621-8202</a>. CGU and KGI students: see your school's <a href="https://services.claremont.edu/mcaps/referrals-resources">mental health resources</a>.</p>
+    <p>In a crisis, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline), call Campus Safety at <a href="tel:+19096072000">(909) 607-2000</a>, or call <strong>911</strong> in an emergency.</p>
+  </div>
 
 </div>
+{% endif %}

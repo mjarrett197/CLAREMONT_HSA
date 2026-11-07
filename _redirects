@@ -1,3 +1,12 @@
 # Old URL → new URL, one per line.
 /board/          /about/#leadership   301
+
+# About and Contact stay hidden until they have content (src/_data/about.js,
+# board.js, site.js). These only apply while those pages don't exist.
+/about/          /                    302
+/contact/        /                    302
 /get-involved/   /join/               301
+
+# Wellness Center is switched off (site.js). This only applies while the
+# page doesn't exist; once it is switched back on, the page wins.
+/wellness/       /                    302
