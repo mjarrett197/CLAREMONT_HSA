@@ -3,8 +3,16 @@
   command = "npx @11ty/eleventy"
 
 [functions]
-  # submission-created.js copies each membership sign-up to the Google Sheet.
+  # admin.mjs = the /admin/ page's server side; roster.mjs = the public
+  # Members page list. Both share netlify/lib/.
   directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
 
 [[headers]]
   for = "/*"

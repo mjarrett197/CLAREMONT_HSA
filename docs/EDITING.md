@@ -34,20 +34,37 @@ It appears on the Events calendar under its month, with an "Add to Google
 Calendar" link, and on the home page if it's one of the next three. When the
 date passes it moves to "Past events" on the next rebuild.
 
-## Sign-ups in Google Sheets
+## Admin page: sign-ups and the roster
 
-Every verified sign-up is also copied to a board-only Google Sheet by
-`netlify/functions/submission-created.js`. The sheet's Apps Script link
-(ending in `?token=...`) is stored in Netlify under Project configuration →
-Environment variables → `SHEETS_WEBHOOK_URL`, never in the code. If the sheet
-ever stops updating, sign-ups are still safe in Netlify; check the function's
-log under Logs → Functions, and the sheet's "Webhook log" tab.
+Board admins manage sign-ups at **/admin/** (not linked from the site).
+Each admin has their own name and password; the owner signs in as `owner`.
 
-## New member sign-ups → the roster
+- **Sign-ups tab:** every membership sign-up, newest first. Search, filter
+  by college, edit details (corrections are stored alongside; Netlify keeps
+  the original), add board notes, delete, and export a CSV.
+- **Members page column:** "Add to page" puts someone on the public Members
+  page within about a minute, with no site update. Only shown for people who
+  ticked the box asking to be listed.
+- **Admins tab (owner only):** add an admin (a password is generated and
+  shown once), give someone a new password, or remove them. Both sign that
+  person out everywhere.
+- **Activity tab (owner only):** the last 100 actions, with who did them.
 
-Sign-ups from the Become a Member form (and its QR code) appear in Netlify
-under **Forms → membership**, with name, email, phone, college and
-graduation year.
+Behind the scenes: `netlify/functions/admin.mjs` and `roster.mjs`, with the
+rules in `netlify/lib/admin-core.mjs`. Edits, roster approvals and admin
+accounts are stored in Netlify Blobs (store `chs-admin`). Two environment
+variables, scope Functions, marked secret:
+
+- `ADMIN_OWNER_PASSWORD`: the owner's password, 16+ characters. Changing it
+  signs the owner out everywhere.
+- `NETLIFY_API_TOKEN`: a Netlify personal access token, used to read and
+  delete sign-ups. It has full access to the Netlify account, so keep it
+  only there, set an expiry, and make a new one if it might have leaked.
+
+## Adding someone to the roster by hand
+
+Normally use the admin page. To list someone permanently in the code
+instead (for example, a founding member who didn't use the form):
 
 If the person ticked "Also list my name ... on the public Members page" (it
 starts unticked), add a line to

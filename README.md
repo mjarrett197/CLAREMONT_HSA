@@ -4,7 +4,7 @@ Website for the Claremont Hindu Society (CHS) at the Claremont Colleges.
 
 - **Live at:** https://claremonthsa.netlify.app
 - **Stack:** Eleventy · Netlify (same as globalspiritualcare-website)
-- **Membership form:** Netlify Forms (submissions in the Netlify dashboard)
+- **Membership form:** Netlify Forms; board admins manage sign-ups and the public roster at `/admin/`
 - **QR codes:** generated on every build from the links in `site.js`; print them from `/qr/`
 - **Deploys:** every push to `main` on GitHub rebuilds and publishes the site automatically
 

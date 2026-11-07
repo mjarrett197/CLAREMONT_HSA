@@ -54,17 +54,17 @@ seoDescription: "The Hindu Society of the Claremont Colleges: CGU, CMC, Harvey M
   {% endif %}
 </section>
 
-{% if members.length %}
-<section class="home-section">
+<section class="home-section" id="home-members"{% if not members.length %} hidden{% endif %}>
   <h2>Our members</h2>
   <p>CHS brings together students from all seven Claremont Colleges.</p>
-  <div class="college-chips">
+  <div class="college-chips" id="home-member-chips">
   {% for c in colleges %}
     {% set n = (members | membersOf(c.id)).length %}
     <a class="college-chip" href="/members/#{{ c.id }}"><strong>{{ c.short }}</strong><span>{{ n }} member{% if n != 1 %}s{% endif %}</span></a>
   {% endfor %}
   </div>
 </section>
-{% endif %}
+<script type="application/json" id="roster-data">{"colleges": {{ colleges | dump | safe }}, "members": {{ members | dump | safe }}}</script>
+<script src="/js/roster.js" defer></script>
 
 </div>

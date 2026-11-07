@@ -6,23 +6,24 @@ permalink: /members/
 seoTitle: "Members | Claremont Hindu Society"
 seoDescription: "The Claremont Hindu Society membership roster by college."
 ---
-{# Rendered from src/_data/members.js and colleges.js. Only names, college
-   and graduation year are ever published here. #}
+{# Rendered from src/_data/members.js and colleges.js, then topped up in the
+   browser with members approved on the admin page (/api/roster, via
+   /js/roster.js). Only names, college and graduation year are ever published. #}
 <div class="container">
 
   <section class="page-hero">
     <h1>{{ title }}</h1>
     <p class="subtitle">{{ subtitle }}</p>
-    {% if members.length %}<p class="roster-total">{{ members.length }} member{% if members.length != 1 %}s{% endif %} listed · <a href="/join/">Become a member →</a></p>{% endif %}
+    <p class="roster-total" id="roster-total"{% if not members.length %} hidden{% endif %}><span id="roster-total-count">{{ members.length }} member{% if members.length != 1 %}s{% endif %}</span> listed · <a href="/join/">Become a member →</a></p>
   </section>
 
-  {% if not members.length %}
-  <div class="page-content roster-start">
+  <div class="page-content roster-start" id="roster-start"{% if members.length %} hidden{% endif %}>
     <p>The roster starts as members join. Members who choose to be listed appear here, grouped by college.</p>
     <p><a href="/join/" class="btn btn-primary">Become a Member</a></p>
   </div>
-  {% else %}
-  <div class="roster">
+<script type="application/json" id="roster-data">{"colleges": {{ colleges | dump | safe }}, "members": {{ members | dump | safe }}}</script>
+<script src="/js/roster.js" defer></script>
+  <div class="roster" id="roster-grid"{% if not members.length %} hidden{% endif %}>
   {% for c in colleges %}
     {% set people = members | membersOf(c.id) %}
     <section class="roster-college" id="{{ c.id }}">
@@ -40,7 +41,6 @@ seoDescription: "The Claremont Hindu Society membership roster by college."
     </section>
   {% endfor %}
   </div>
-  {% endif %}
 
   <p class="roster-note">Members choose whether their name appears here. Contact details are never published.</p>
 

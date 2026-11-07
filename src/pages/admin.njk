@@ -1,0 +1,148 @@
+---
+title: "Admin"
+layout: base.njk
+permalink: /admin/
+noindex: true
+eleventyExcludeFromCollections: true
+---
+{# CHS admin page. Not linked anywhere on the site. Everything sensitive is
+   checked on the server (netlify/functions/admin.mjs); this page only shows
+   what the server allows. Behaviour lives in /js/admin.js. #}
+<div class="container admin">
+
+  <p id="admin-loading" class="admin-loading">Loading…</p>
+
+  <section id="admin-login" class="admin-card admin-login" hidden>
+    <h1>Admin sign-in</h1>
+    <p class="admin-muted">For CHS board admins. Ask the site owner if you need an account.</p>
+    <form id="login-form" novalidate>
+      <div class="field">
+        <label for="login-name">Name</label>
+        <input id="login-name" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      </div>
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+      </div>
+      <p id="login-error" class="admin-error" role="alert" hidden></p>
+      <button class="btn btn-primary" type="submit">Sign in</button>
+    </form>
+  </section>
+
+  <section id="admin-app" hidden>
+    <div class="admin-bar">
+      <div>
+        <h1>Member sign-ups</h1>
+        <p class="admin-muted" id="admin-who"></p>
+      </div>
+      <div class="admin-bar-actions">
+        <button type="button" class="admin-btn" id="btn-password">Change password</button>
+        <button type="button" class="admin-btn" id="btn-logout">Sign out</button>
+      </div>
+    </div>
+
+    <div class="admin-tabs" role="tablist" id="admin-tabs" hidden>
+      <button type="button" role="tab" aria-selected="true" data-tab="signups">Sign-ups</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="admins">Admins</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="activity">Activity</button>
+    </div>
+
+    <div id="tab-signups" class="admin-panel">
+      <div class="admin-toolbar">
+        <input type="search" id="f-search" placeholder="Search name, email or phone" aria-label="Search sign-ups">
+        <select id="f-college" aria-label="Filter by college"><option value="">All colleges</option></select>
+        <label class="admin-check"><input type="checkbox" id="f-wants"> Asked to be listed</label>
+        <span class="admin-count" id="f-count"></span>
+        <span class="admin-spacer"></span>
+        <button type="button" class="admin-btn" id="btn-refresh">Refresh</button>
+        <button type="button" class="admin-btn" id="btn-export">Export CSV</button>
+      </div>
+      <p id="signups-error" class="admin-error" role="alert" hidden></p>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="signups-table">
+          <thead><tr>
+            <th>Signed up</th><th>Name</th><th>Email</th><th>Phone</th><th>College</th><th>Year</th><th>Members page</th><th><span class="sr-only">Actions</span></th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="signups-empty" class="admin-empty" hidden>No sign-ups yet.</p>
+    </div>
+
+    <div id="tab-admins" class="admin-panel" hidden>
+      <div class="admin-card">
+        <h2>Add an admin</h2>
+        <p class="admin-muted">Each admin gets their own password, shown once. Send it to them privately (in person or a direct message, not a group chat). Removing an admin or resetting their password signs them out everywhere.</p>
+        <form id="add-admin-form" class="admin-inline-form" novalidate>
+          <input id="new-admin-name" placeholder="name, e.g. priya.sharma" autocapitalize="none" spellcheck="false" aria-label="New admin's name">
+          <button class="btn btn-primary" type="submit">Add admin</button>
+        </form>
+        <p id="admins-error" class="admin-error" role="alert" hidden></p>
+        <div id="new-password" class="admin-secret" hidden>
+          <p><strong id="new-password-who"></strong>'s password (shown only now):</p>
+          <code id="new-password-value"></code>
+          <button type="button" class="admin-btn" id="btn-copy-password">Copy</button>
+        </div>
+      </div>
+      <table class="admin-table admin-table-simple" id="admins-table">
+        <thead><tr><th>Name</th><th>Added</th><th>Last sign-in</th><th><span class="sr-only">Actions</span></th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p id="admins-empty" class="admin-empty" hidden>No other admins yet. You're the only one who can sign in.</p>
+    </div>
+
+    <div id="tab-activity" class="admin-panel" hidden>
+      <p class="admin-muted">The last 100 actions on this page.</p>
+      <ul class="admin-activity" id="activity-list"></ul>
+    </div>
+  </section>
+
+  <dialog id="dlg-edit" class="admin-dialog">
+    <form method="dialog" id="edit-form" novalidate>
+      <h2>Edit sign-up</h2>
+      <p class="admin-muted">Changes are saved on this page; the original sign-up stays in Netlify.</p>
+      <div class="field"><label for="e-name">Full name</label><input id="e-name" required maxlength="100"></div>
+      <div class="field-row">
+        <div class="field"><label for="e-email">Email</label><input id="e-email" type="email" maxlength="200"></div>
+        <div class="field"><label for="e-phone">Phone</label><input id="e-phone" type="tel" maxlength="40"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="e-college">College</label><select id="e-college"><option value="">Not given</option></select></div>
+        <div class="field"><label for="e-year">Graduation year</label><input id="e-year" inputmode="numeric" maxlength="4"></div>
+      </div>
+      <div class="field"><label for="e-notes">Board notes (never shown publicly)</label><textarea id="e-notes" rows="3" maxlength="1000"></textarea></div>
+      <p id="edit-error" class="admin-error" role="alert" hidden></p>
+      <div class="admin-dialog-actions">
+        <button type="button" class="admin-btn" data-close>Cancel</button>
+        <button type="submit" class="btn btn-primary" value="save">Save changes</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dlg-confirm" class="admin-dialog admin-dialog-small">
+    <form method="dialog">
+      <h2 id="confirm-title"></h2>
+      <p id="confirm-text"></p>
+      <div class="admin-dialog-actions">
+        <button type="button" class="admin-btn" data-close>Cancel</button>
+        <button type="submit" class="btn admin-danger" id="confirm-ok" value="ok"></button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="dlg-password" class="admin-dialog admin-dialog-small">
+    <form method="dialog" id="password-form" novalidate>
+      <h2>Change your password</h2>
+      <div class="field"><label for="p-current">Current password</label><input id="p-current" type="password" autocomplete="current-password"></div>
+      <div class="field"><label for="p-next">New password (12+ characters)</label><input id="p-next" type="password" autocomplete="new-password" minlength="12"></div>
+      <p id="password-error" class="admin-error" role="alert" hidden></p>
+      <div class="admin-dialog-actions">
+        <button type="button" class="admin-btn" data-close>Cancel</button>
+        <button type="submit" class="btn btn-primary" value="save">Change password</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="admin-toast" class="admin-toast" role="status" aria-live="polite" hidden></div>
+</div>
+<script src="/js/admin.js" defer></script>

@@ -7,6 +7,7 @@ const TZ = "America/Los_Angeles";
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("images");
+  eleventyConfig.addPassthroughCopy("js");
   eleventyConfig.addPassthroughCopy("_redirects");
 
   eleventyConfig.addFilter("isoDate", (d) => new Date(d).toISOString().slice(0, 10));
