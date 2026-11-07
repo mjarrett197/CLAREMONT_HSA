@@ -3,7 +3,7 @@
 //
 // Environment variables (Netlify: Project configuration -> Environment
 // variables, scope must include Functions, mark as secret):
-//   ADMIN_OWNER_PASSWORD  the owner's password, 16+ characters
+//   ADMIN_OWNER_PASSWORD  the owner's password (any length; longer is safer)
 //   NETLIFY_API_TOKEN     personal access token, used to read/delete sign-ups
 
 import { getStore } from "@netlify/blobs";

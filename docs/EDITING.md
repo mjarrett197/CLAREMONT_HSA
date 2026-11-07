@@ -55,7 +55,7 @@ rules in `netlify/lib/admin-core.mjs`. Edits, roster approvals and admin
 accounts are stored in Netlify Blobs (store `chs-admin`). Two environment
 variables, scope Functions, marked secret:
 
-- `ADMIN_OWNER_PASSWORD`: the owner's password, 16+ characters. Changing it
+- `ADMIN_OWNER_PASSWORD`: the owner's password (any length; longer is safer). Changing it
   signs the owner out everywhere.
 - `NETLIFY_API_TOKEN`: a Netlify personal access token, used to read and
   delete sign-ups. It has full access to the Netlify account, so keep it

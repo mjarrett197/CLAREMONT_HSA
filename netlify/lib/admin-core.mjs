@@ -71,7 +71,7 @@ export function createAdmin({ store, api, colleges, ownerPassword = "", now = ()
     for (let i = 0; i < 20; i++) out += alphabet[bytes[i] % alphabet.length] + (i % 4 === 3 && i < 19 ? "-" : "");
     return out;
   }
-  const ownerConfigured = () => typeof ownerPassword === "string" && ownerPassword.length >= 16;
+  const ownerConfigured = () => typeof ownerPassword === "string" && ownerPassword.length > 0;
   const ownerVersion = () => sha("owner:" + ownerPassword).slice(0, 12);
 
   async function audit(who, action, target = "") {
@@ -295,7 +295,7 @@ export function createAdmin({ store, api, colleges, ownerPassword = "", now = ()
         const { current = "", next = "" } = await readBody(request);
         const rec = await store.get(`admins/${user.name}`, { type: "json" });
         if (!rec || !(await checkPassword(String(current), rec.hash))) return fail(400, "Your current password isn't right.");
-        if (String(next).length < 12) return fail(400, "Use at least 12 characters for the new password.");
+        if (!String(next)) return fail(400, "Enter a new password.");
         const version = crypto.randomBytes(6).toString("hex");
         await store.setJSON(`admins/${user.name}`, { ...rec, hash: await hashPassword(String(next)), version });
         await audit(user.name, "changed own password");
